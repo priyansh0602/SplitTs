@@ -53,13 +53,13 @@ const CheckIcon = () => (
 );
 
 const FilterIcon = () => (
-  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#adc6ff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
   </svg>
 );
 
 const ChunksIcon = () => (
-  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4edea3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--secondary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <rect x="3" y="3" width="7" height="7" />
     <rect x="14" y="3" width="7" height="7" />
     <rect x="3" y="14" width="7" height="7" />
@@ -68,7 +68,7 @@ const ChunksIcon = () => (
 );
 
 const ShieldIcon = () => (
-  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffb786" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+  <svg className="feature-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--tertiary)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
   </svg>
 );

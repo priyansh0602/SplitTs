@@ -6,29 +6,29 @@
 /* ── CSS Custom Properties ────────────────────────────────────────────────── */
 
 :root {
-  /* Colors — Dark Mode */
-  --background:                 #0b1326;
-  --surface:                    #0b1326;
-  --surface-container-low:      #131b2e;
-  --surface-container:          #171f33;
-  --surface-container-high:     #222a3d;
-  --surface-container-highest:  #2d3449;
-  --surface-bright:             #31394d;
+  /* Colors — Light Mode */
+  --background:                 #f8fafc;
+  --surface:                    #ffffff;
+  --surface-container-low:      #ffffff;
+  --surface-container:          #f1f5f9;
+  --surface-container-high:     #e2e8f0;
+  --surface-container-highest:  #cbd5e1;
+  --surface-bright:             #ffffff;
 
-  --on-surface:                 #dae2fd;
-  --on-surface-variant:         #c2c6d6;
-  --outline:                    #8c909f;
-  --outline-variant:            #424754;
+  --on-surface:                 #0f172a;
+  --on-surface-variant:         #475569;
+  --outline:                    #94a3b8;
+  --outline-variant:            #cbd5e1;
 
-  --primary:                    #adc6ff;
-  --primary-container:          #4d8eff;
-  --on-primary:                 #002e6a;
+  --primary:                    #2563eb;
+  --primary-container:          #2563eb;
+  --on-primary:                 #ffffff;
 
-  --secondary:                  #4edea3;
-  --secondary-container:        #00a572;
+  --secondary:                  #16a34a;
+  --secondary-container:        #16a34a;
 
-  --tertiary:                   #ffb786;
-  --error:                      #ffb4ab;
+  --tertiary:                   #ea580c;
+  --error:                      #dc2626;
 
   /* Spacing — 4px baseline */
   --space-xs:    4px;
@@ -46,9 +46,9 @@
   --radius-lg:   1rem;
   --radius-xl:   1.5rem;
 
-  /* Shadows — minimal, tonal approach */
-  --shadow-overlay: 0 8px 32px rgba(0, 0, 0, 0.15);
-  --shadow-card:    0 2px 8px rgba(0, 0, 0, 0.08);
+  /* Shadows — elegant light mode shadow */
+  --shadow-overlay: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.08);
+  --shadow-card:    0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
 
   /* Transitions */
   --transition-fast:   150ms ease;
@@ -67,7 +67,7 @@
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
   scroll-behavior: smooth;
 }
 
@@ -236,11 +236,13 @@ a:hover {
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
   padding: var(--space-lg);
-  transition: border-color var(--transition-normal);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
 }
 
 .card:hover {
-  border-color: var(--outline);
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .card-title {
@@ -276,7 +278,7 @@ a:hover {
 .dropzone:hover,
 .dropzone.drag-over {
   border-color: var(--primary-container);
-  background: rgba(77, 142, 255, 0.05);
+  background: rgba(37, 99, 235, 0.04);
 }
 
 .dropzone.drag-over {
@@ -461,8 +463,8 @@ a:hover {
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: rgba(78, 222, 163, 0.1);
-  border: 1px solid rgba(78, 222, 163, 0.2);
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.16);
   border-radius: var(--radius);
   font-family: var(--font-mono), 'JetBrains Mono', monospace;
   font-size: 12px;
@@ -495,8 +497,8 @@ a:hover {
 }
 
 .btn-primary:hover:not(:disabled) {
-  background: #5a95ff;
-  box-shadow: 0 0 20px rgba(77, 142, 255, 0.2);
+  background: #1d4ed8;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
 .btn-primary:active:not(:disabled) {
@@ -527,8 +529,8 @@ a:hover {
 }
 
 .btn-unlock:hover:not(:disabled) {
-  background: #00b87d;
-  box-shadow: 0 0 20px rgba(0, 165, 114, 0.25);
+  background: #15803d;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.2);
 }
 
 .btn-unlock:active:not(:disabled) {
@@ -558,7 +560,7 @@ a:hover {
 }
 
 .btn-download:hover {
-  background: #5a95ff;
+  background: #1d4ed8;
 }
 
 .btn-download.locked {
@@ -739,8 +741,8 @@ a:hover {
   justify-content: center;
   gap: var(--space-sm);
   padding: 12px var(--space-md);
-  background: rgba(78, 222, 163, 0.1);
-  border: 1px solid rgba(78, 222, 163, 0.25);
+  background: rgba(22, 163, 74, 0.08);
+  border: 1px solid rgba(22, 163, 74, 0.16);
   border-radius: var(--radius-md);
   margin-top: var(--space-md);
   animation: slideUp 0.4s ease;
@@ -814,11 +816,13 @@ a:hover {
   background: var(--surface-container-low);
   border: 1px solid var(--outline-variant);
   border-radius: var(--radius-lg);
-  transition: border-color var(--transition-normal);
+  box-shadow: var(--shadow-card);
+  transition: all var(--transition-normal);
 }
 
 .feature-card:hover {
-  border-color: var(--outline);
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
 }
 
 .feature-icon {
@@ -1004,8 +1008,8 @@ a:hover {
   justify-content: center;
   gap: var(--space-sm);
   padding: 12px var(--space-md);
-  background: rgba(255, 180, 171, 0.1);
-  border: 1px solid rgba(255, 180, 171, 0.25);
+  background: rgba(220, 38, 38, 0.08);
+  border: 1px solid rgba(220, 38, 38, 0.16);
   border-radius: var(--radius-md);
   margin-top: var(--space-md);
   animation: slideUp 0.4s ease;
