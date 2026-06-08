@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SplitTs ✂️
 
-## Getting Started
+Make your project token-efficient for Claude, ChatGPT, and other LLMs.
 
-First, run the development server:
+**SplitTs** is a blazing-fast, client-side tool that takes your bloated project `.zip`, strips out all the noise (`node_modules`, `.git`, `dist`, images), and splits your raw source code into perfectly sized `.txt` chunks. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Feed your entire codebase into Claude's context window without hitting token limits.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
+- **Intelligent Filtering:** Automatically removes `.git`, `node_modules`, `dist`, and large binary assets to save you millions of useless tokens.
+- **Perfect Chunks:** Maintains directory structure while splitting your codebase into configurable chunk sizes (e.g., 5MB, 10MB, 30MB) so Claude never chokes.
+- **Secure Local Processing:** Your code never leaves your browser. Zip extraction, filtering, and splitting happen instantly on your own machine.
+- **Frictionless Pay-Per-Use:** No signups, no subscriptions. Just a one-time ₹1 Razorpay micro-transaction to unlock your freshly optimized files.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🚀 How It Works
+1. **Upload:** Drag and drop your project `.zip`.
+2. **Configure:** Use the slider to pick your target part size (e.g., 30MB for standard Claude Sonnet, smaller for others).
+3. **Split:** The app instantly processes the zip in your browser and previews the resulting chunks.
+4. **Unlock:** Pay ₹1 securely via Razorpay.
+5. **Download:** Instantly download your token-efficient `.txt` files.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 💻 Tech Stack
+- **Frontend:** React, Next.js (App Router), JSZip
+- **Backend:** Next.js API Routes (Serverless) for secure payment generation and verification.
+- **Database:** Supabase (Single table for logging payment success).
+- **Payments:** Razorpay.
 
-## Learn More
+## 🛠️ Local Development
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/priyansh0602/SplitTs.git
+   cd SplitTs
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Set up environment variables (`.env.local`):
+   ```env
+   RAZORPAY_KEY_ID=your_live_key
+   RAZORPAY_KEY_SECRET=your_live_secret
+   NEXT_PUBLIC_RAZORPAY_KEY_ID=your_live_key
+   
+   SUPABASE_URL=your_supabase_url
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
