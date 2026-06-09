@@ -544,7 +544,7 @@ export default function Home() {
           <ChunksIcon />
           <h3 className="feature-title">Perfect Chunks</h3>
           <p className="feature-description">
-            Maintains directory structure and never splits a file so Claude understands where each file belongs in the tree.
+            Maintains directory structure and splits massive files smoothly so your context window never overflows.
           </p>
         </div>
         <div className="feature-card" id="feature-local">
