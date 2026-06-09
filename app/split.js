@@ -132,6 +132,32 @@ function byteSize(str) {
   return new TextEncoder().encode(str).length;
 }
 
+/**
+ * Safely chunk a string so that each chunk is under maxBytes
+ */
+function chunkStringSafe(str, maxBytes) {
+  const chunks = [];
+  let startIndex = 0;
+  
+  while (startIndex < str.length) {
+    let length = maxBytes;
+    if (startIndex + length > str.length) {
+      length = str.length - startIndex;
+    }
+    
+    let chunk = str.substring(startIndex, startIndex + length);
+    while (byteSize(chunk) > maxBytes && length > 1) {
+      length = Math.floor(length * (maxBytes / byteSize(chunk)) * 0.95);
+      if (length < 1) length = 1;
+      chunk = str.substring(startIndex, startIndex + length);
+    }
+    
+    chunks.push(chunk);
+    startIndex += length;
+  }
+  return chunks;
+}
+
 // ── Strip the top-level folder prefix from zip entries ───────────────────────
 
 function stripTopLevelFolder(files) {
@@ -214,21 +240,35 @@ export async function processZip(file, maxPartSizeMB = 30, onProgress = null) {
   let currentPartSize = 0;
 
   for (const fileEntry of strippedFiles) {
+    const rawFormattedSize = byteSize(formatFileEntry(fileEntry.path, fileEntry.content));
+
+    // If this single file is larger than the max part size, we need to split it
+    if (rawFormattedSize > maxPartSizeBytes) {
+      const overhead = byteSize(formatFileEntry(`${fileEntry.path} (Part 999/999)`, ""));
+      const availableBytes = maxPartSizeBytes - overhead - 1000; // 1000 bytes safety margin
+      
+      if (availableBytes > 0) {
+        const fileChunks = chunkStringSafe(fileEntry.content, availableBytes);
+        
+        for (let i = 0; i < fileChunks.length; i++) {
+          const chunkContent = fileChunks[i];
+          const formattedChunk = formatFileEntry(`${fileEntry.path} (Part ${i + 1}/${fileChunks.length})`, chunkContent);
+          const formattedChunkSize = byteSize(formattedChunk);
+          
+          if (currentPartSize + formattedChunkSize > maxPartSizeBytes && currentPartEntries.length > 0) {
+            parts.push(currentPartEntries.join("\n"));
+            currentPartEntries = [];
+            currentPartSize = 0;
+          }
+          currentPartEntries.push(formattedChunk);
+          currentPartSize += formattedChunkSize;
+        }
+        continue;
+      }
+    }
+
     const formatted = formatFileEntry(fileEntry.path, fileEntry.content);
     const formattedSize = byteSize(formatted);
-
-    // If this single file is larger than the max part size, put it in its own part
-    if (formattedSize > maxPartSizeBytes) {
-      // Save current part if it has entries
-      if (currentPartEntries.length > 0) {
-        parts.push(currentPartEntries.join("\n"));
-        currentPartEntries = [];
-        currentPartSize = 0;
-      }
-      // Add the large file as its own part
-      parts.push(formatted);
-      continue;
-    }
 
     // Check if adding this file would exceed the limit
     if (currentPartSize + formattedSize > maxPartSizeBytes && currentPartEntries.length > 0) {
