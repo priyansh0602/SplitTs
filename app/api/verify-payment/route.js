@@ -1,13 +1,5 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { createClient } from "@supabase/supabase-js";
-
-function getSupabaseClient() {
-  return createClient(
-    process.env.SUPABASE_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY
-  );
-}
 
 export async function POST(request) {
   try {
@@ -30,20 +22,9 @@ export async function POST(request) {
       );
     }
 
-    const supabase = getSupabaseClient();
-
-    // Log to Supabase
-    const { error: dbError } = await supabase.from("payments").insert({
-      order_id: razorpay_order_id,
-      payment_id: razorpay_payment_id,
-      status: "success",
-    });
-
-    if (dbError) {
-      console.error("Supabase insert error:", dbError);
-      // Payment is still valid even if DB logging fails
-      // Don't block the user
-    }
+    // Payment signature is valid! 
+    // Razorpay keeps track of all transactions in their dashboard, 
+    // so we don't need to log it to a database here.
 
     return NextResponse.json({ success: true });
   } catch (error) {
