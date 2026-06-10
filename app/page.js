@@ -452,7 +452,7 @@ export default function Home() {
                 <div className="processing-spinner" />
                 <div className="processing-text">{progress?.message || "Working..."}</div>
                 <div className="processing-subtext">
-                  Everything happens locally in your browser
+                  Securely parsing your project structure
                 </div>
               </div>
             </>
@@ -547,11 +547,11 @@ export default function Home() {
             Maintains directory structure and splits massive files smoothly so your context window never overflows.
           </p>
         </div>
-        <div className="feature-card" id="feature-local">
+        <div className="feature-card" id="feature-secure">
           <ShieldIcon />
-          <h3 className="feature-title">Local Processing</h3>
+          <h3 className="feature-title">Secure Processing</h3>
           <p className="feature-description">
-            We process in-browser and split instructions instantly. Your secrets stay in your environment.
+            We securely process your files and split instructions instantly. Your data is handled with care.
           </p>
         </div>
       </section>
@@ -559,7 +559,7 @@ export default function Home() {
       {/* Privacy Note */}
       <div className="privacy-note" id="privacy-note">
         <ShieldSmallIcon />
-        <span>Your files never leave your browser. All processing is 100% client-side.</span>
+        <span>Your codebase is processed securely. We don't store your code after you download.</span>
       </div>
 
       {/* Footer */}
